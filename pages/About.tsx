@@ -19,16 +19,14 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <AIImage 
-                prompt="A professional, friendly-looking middle-aged man in a green work uniform, smiling, holding a rake in a beautiful sun-drenched Gold Coast garden. Cinematic, realistic." 
-                alt="Bob at work" 
-                className="rounded-2xl shadow-2xl relative z-10 w-full" 
+              <AIImage
+                prompt="A professional, friendly-looking middle-aged man in a green work uniform, smiling, holding a rake in a beautiful sun-drenched Gold Coast garden. Cinematic, realistic."
+                alt="Bob at work"
+                className="rounded-2xl shadow-2xl relative z-10 w-full"
                 aspectRatio="4:3"
               />
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary rounded-2xl -z-0 opacity-20"></div>
-              <div className="absolute -top-6 -left-6 w-48 h-48 border-4 border-earth rounded-2xl -z-0"></div>
             </div>
-            
+
             <div>
               <h2 className="text-3xl font-serif font-bold text-earth mb-6">Born from a passion for nature</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
@@ -37,7 +35,7 @@ const About: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Today, we have grown into a small, dedicated team of landscaping professionals. Despite our growth, our core values remain the same: reliability, meticulous attention to detail, and a genuine love for the Australian outdoors.
               </p>
-              
+
               <div className="space-y-6 my-10">
                 {[
                   { title: "Experience", desc: "Over 10 years of transforming Gold Coast gardens.", icon: "fa-calendar-check" },
