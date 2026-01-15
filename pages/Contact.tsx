@@ -4,10 +4,10 @@ import { BUSINESS_INFO, SERVICES } from '../constants';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     phone: '',
-    service: '',
+    serviceRequired: '',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
@@ -35,7 +35,7 @@ const Contact: React.FC = () => {
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+        setFormData({ fullName: '', email: '', phone: '', serviceRequired: '', message: '' });
       } else {
         alert("There was a problem submitting your form. Please try again.");
       }
@@ -149,9 +149,9 @@ const Contact: React.FC = () => {
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Your Name *</label>
                         <input
                           type="text"
-                          name="name"
+                          name="fullName"
                           required
-                          value={formData.name}
+                          value={formData.fullName}
                           onChange={handleChange}
                           className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
                           placeholder="John Smith"
@@ -184,8 +184,8 @@ const Contact: React.FC = () => {
                       <div className="space-y-2">
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Service Required</label>
                         <select
-                          name="service"
-                          value={formData.service}
+                          name="serviceRequired"
+                          value={formData.serviceRequired}
                           onChange={handleChange}
                           className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
                         >
