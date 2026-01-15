@@ -18,31 +18,9 @@ const AIImage: React.FC<AIImageProps> = ({ prompt, alt, className = "", aspectRa
   const isGenerating = useRef(false);
 
   useEffect(() => {
-    if (imageUrl || isGenerating.current) return;
-
-    const generateImage = async () => {
-      isGenerating.current = true;
-      try {
-        // Mock image generation using Unsplash source for static deployment
-        await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network delay
-
-        const keywords = prompt.split(' ').slice(0, 3).join(',');
-        const url = `https://source.unsplash.com/1600x900/?landscape,garden,${keywords}`;
-
-        setImageUrl(url);
-        imageCache[prompt] = url;
-
-      } catch (err) {
-        console.error("Image loading failed:", err);
-        setError(true);
-      } finally {
-        setLoading(false);
-        isGenerating.current = false;
-      }
-    };
-
-    generateImage();
-  }, [prompt, imageUrl, aspectRatio]);
+    setImageUrl("/site-image.jpg");
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return (

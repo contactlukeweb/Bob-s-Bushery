@@ -233,7 +233,7 @@ const Contact: React.FC = () => {
 
       {/* Map Section Placeholder */}
       <section className="h-96 relative w-full grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1920" alt="Gold Coast Service Area Map" className="w-full h-full object-cover" />
+        <img src="/site-image.jpg" alt="Gold Coast Service Area Map" className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="bg-white/90 p-6 rounded-2xl shadow-xl border border-stone-200 text-center backdrop-blur-sm">
             <h4 className="font-bold text-earth text-xl mb-1">Our Service Area</h4>
