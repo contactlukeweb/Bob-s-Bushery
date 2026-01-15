@@ -20,16 +20,31 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    try {
+      const response = await fetch("https://formspree.io/f/xqeeabzo", {
+        method: "POST",
+        body: new FormData(e.target as HTMLFormElement),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      } else {
+        alert("There was a problem submitting your form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      alert("There was a problem submitting your form. Please try again.");
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-      console.log("Form data submitted to:", BUSINESS_INFO.quoteEmail, formData);
-    }, 1500);
+    }
   };
 
   return (
@@ -46,7 +61,7 @@ const Contact: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            
+
             {/* Contact Details */}
             <div className="lg:col-span-1 space-y-12">
               <div>
@@ -61,7 +76,7 @@ const Contact: React.FC = () => {
                       <a href={`tel:${BUSINESS_INFO.phone}`} className="text-gray-600 hover:text-primary transition-colors text-lg">{BUSINESS_INFO.phone}</a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-green-50 text-primary flex items-center justify-center rounded-xl text-xl shrink-0">
                       <i className="fas fa-envelope"></i>
@@ -119,7 +134,7 @@ const Contact: React.FC = () => {
                     <p className="text-gray-600 text-lg mb-8">
                       Thank you for contacting Bob's Bushery. We've received your request and will be in touch shortly to discuss your garden.
                     </p>
-                    <button 
+                    <button
                       onClick={() => setSubmitted(false)}
                       className="text-primary font-bold border-b border-primary hover:text-green-800"
                     >
@@ -127,13 +142,13 @@ const Contact: React.FC = () => {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-8" action="https://formspree.io/f/xqeeabzo" method="POST">
                     <h3 className="text-3xl font-serif font-bold text-earth">Ask for a Quote</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Your Name *</label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           name="name"
                           required
                           value={formData.name}
@@ -144,8 +159,8 @@ const Contact: React.FC = () => {
                       </div>
                       <div className="space-y-2">
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Email Address *</label>
-                        <input 
-                          type="email" 
+                        <input
+                          type="email"
                           name="email"
                           required
                           value={formData.email}
@@ -156,8 +171,8 @@ const Contact: React.FC = () => {
                       </div>
                       <div className="space-y-2">
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Phone Number *</label>
-                        <input 
-                          type="tel" 
+                        <input
+                          type="tel"
                           name="phone"
                           required
                           value={formData.phone}
@@ -168,7 +183,7 @@ const Contact: React.FC = () => {
                       </div>
                       <div className="space-y-2">
                         <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Service Required</label>
-                        <select 
+                        <select
                           name="service"
                           value={formData.service}
                           onChange={handleChange}
@@ -182,7 +197,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div className="space-y-2">
                       <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Message / Garden Details</label>
-                      <textarea 
+                      <textarea
                         name="message"
                         rows={5}
                         value={formData.message}
@@ -191,8 +206,8 @@ const Contact: React.FC = () => {
                         placeholder="Tell us a bit about your property and what you need help with..."
                       ></textarea>
                     </div>
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       disabled={loading}
                       className="w-full bg-primary hover:bg-green-800 text-white font-bold py-5 rounded-xl text-xl transition-all shadow-xl disabled:opacity-50 flex items-center justify-center space-x-3"
                     >
